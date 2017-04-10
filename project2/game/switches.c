@@ -7,8 +7,7 @@ char switch_state_down, switch_state_changed; /* effectively boolean */
 char btn1, btn2, btn3, btn4;
 
 static char 
-switch_update_interrupt_sense()
-{
+switch_update_interrupt_sense(){
   char p1val = P2IN;
   /* update switch interrupt to detect changes from current buttons */
   P2IES |= (p1val & SWITCHES);	/* if switch up, sense down */
@@ -17,8 +16,7 @@ switch_update_interrupt_sense()
 }
 
 void 
-switch_init()			/* setup switch */
-{  
+switch_init()			/* setup switch */{  
   P2REN |= SWITCHES;		/* enables resistors for switches */
   P2IE = SWITCHES;		/* enable interrupts from switches */
   P2OUT |= SWITCHES;		/* pull-ups for switc9hes */
@@ -28,8 +26,7 @@ switch_init()			/* setup switch */
 }
 
 void
-switch_interrupt_handler()
-{
+switch_interrupt_handler(){
   char p1val = switch_update_interrupt_sense();
   switch_state_down |= (p1val & SW1) ? 0 : 1; /* 0 when SW1 is up */
   switch_state_down |= (p1val & SW2) ? 0 : 1;
